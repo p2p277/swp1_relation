@@ -1,0 +1,40 @@
+<ul>
+    <% @pppp.each do |b| %>
+    <li>
+        <%=b.user.email%>
+    <div class="well">
+    <%=b.content%>   
+        <%if user_signed_in? and b.user.id == current_user.id%>
+        <div style="text-align:right">
+        <a href="/delete?id=<%=b.id%>">삭제</a>
+        <a href="/edit?id=<%=b.id%>">수정</a>
+        </div>
+        <%end%>
+    </div>
+    
+        <%=form_tag '/comment', class: "form-inline" do%>
+            <input type="hidden" name="blog_id" value="<%=b.id%>">
+            
+            <div class="form-group">
+                <input type="text" name="comment" class="form-control">
+            </div>
+            
+            <div class="form-group">
+                <input type="submit" class="btn btn-primary">
+            </div>
+        <%end%>
+        
+        <ol>
+            <% b.comments.each do |c| %> 
+        <li> <%=c.user.email%> : <%=c.msg%> 
+            <%if user_signed_in? and c.user.id == current_user.id%>
+            <a href="/delete2?id=<%=c.id%>">삭제</a>
+            <a href="/edit2?id=<%=c.id%>">수정</a>
+            <%end%>
+        </li>
+            <%end%>
+        </ol>
+    </li>
+    <hr>
+    <% end %>
+</ul>

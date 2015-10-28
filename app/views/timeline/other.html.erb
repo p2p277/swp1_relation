@@ -1,0 +1,10 @@
+<h1>남 블로그</h1>
+
+<ul>
+ <% @ppp.each do |b| %>
+ <li>
+    <a href="/yourblog?id=<%=b.id%>"><%=b.email%></a>
+ </li>
+ <br>
+<% end %>
+</ul>

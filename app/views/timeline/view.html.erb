@@ -1,0 +1,46 @@
+<h1><내블로그 모아보기></h1>
+
+<ul>
+    <% @blogs.each do |b| %>
+    <li>
+        <%if user_signed_in? and b.user.id == current_user.id%>
+        <p class="bg-info"><%=b.user.email%> :</p>
+        <% end %>
+    </li>
+        <li>
+            <%if user_signed_in? and b.user.id == current_user.id%>
+            <a href="/edit?id=<%=b.id%>">수정</a>
+            <a href="/destroy?id=<%=b.id%>">삭제</a>
+            <% end %>
+        </li>
+          <%if user_signed_in? and b.user.id == current_user.id%>
+          <div class="well">
+              <%=b.content%>
+              <p><%=b.updated_at%></p>
+          <% end %>
+          </div>
+
+        <%=form_tag '/comment', class: "form-inline" do%>
+        <input type="hidden" name="blog_id" value="<%=b.id%>">
+        <div class="form-group">
+        <input type="text" name="comment" class="form-control">
+        </div>
+        
+        <div class="form-group">
+            <input type="submit" class="btn btn-primary">    
+        </div>
+        
+        <% end %>
+
+        <ol>
+        <% b.comments.each do |c| %>
+            <li><%=c.user.email%> : <%=c.msg%>
+            <%if user_signed_in? and c.user.id == current_user.id%>
+            <a href="/destroy2?id=<%=c.id%>">삭제</a>
+            <% end %>
+            </li>
+        <% end %>
+        </ol>
+    </li>
+    <% end %>
+</ul>

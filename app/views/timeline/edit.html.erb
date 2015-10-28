@@ -1,0 +1,13 @@
+<h1>EDIT</h1>
+<p>EDIT post<%=@blog.id%></p>
+
+<form action="/update">
+    <li>
+        <p class="bg-info"><%=@blog.user.email%> :</p>
+    <li>
+    <input type="hidden" name="id" value="<%=@blog.id%>">
+    <textarea name="naeyong" class="form-control" row="3"><%=@blog.content%></textarea><br>
+    <input type="submit" class="btn btn-success">
+    
+</form>
+
